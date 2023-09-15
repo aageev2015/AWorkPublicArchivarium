@@ -1,0 +1,132 @@
+JS script getting values
+
+Range("E1").Value = xlCSV
+Range("E2").Value = xlCSVMSDOS
+Range("E3").Value = xlCurrentPlatformText
+Range("E4").Value = xlDBF3
+Range("E5").Value = xlDIF
+Range("E6").Value = xlExcel2FarEast
+Range("E7").Value = xlExcel4
+Range("E8").Value = xlAddIn
+Range("E9").Value = xlCSVMac
+Range("E10").Value = xlCSVWindows
+Range("E11").Value = xlDBF2
+Range("E12").Value = xlDBF4
+Range("E13").Value = xlExcel2
+Range("E14").Value = xlExcel3
+Range("E15").Value = xlExcel4Workbook
+Range("E16").Value = xlExcel5
+Range("E17").Value = xlExcel7
+Range("E18").Value = xlExcel9795
+Range("E19").Value = xlHtml
+Range("E20").Value = xlIntlAddIn
+Range("E21").Value = xlIntlMacro
+Range("E22").Value = xlSYLK
+Range("E23").Value = xlTemplate
+Range("E24").Value = xlTextMac
+Range("E25").Value = xlTextMSDOS
+Range("E26").Value = xlTextPrinter
+Range("E27").Value = xlTextWindows
+Range("E28").Value = xlUnicodeText
+Range("E29").Value = xlWebArchive
+Range("E30").Value = xlWJ2WD1
+Range("E31").Value = xlWJ3
+Range("E32").Value = xlWJ3FJ3
+Range("E33").Value = xlWK1
+Range("E34").Value = xlWK1ALL
+Range("E35").Value = xlWK1FMT
+Range("E36").Value = xlWK3
+Range("E37").Value = xlWK3FM3
+Range("E38").Value = xlWK4
+Range("E39").Value = xlWKS
+Range("E40").Value = xlWorkbookNormal
+Range("E41").Value = xlWorks2FarEast
+Range("E42").Value = xlWQ1
+Range("E43").Value = xlXMLSpreadsheet
+
+Range("D1").Value = "xlCSV"
+Range("D2").Value = "xlCSVMSDOS"
+Range("D3").Value = "xlCurrentPlatformText"
+Range("D4").Value = "xlDBF3"
+Range("D5").Value = "xlDIF"
+Range("D6").Value = "xlExcel2FarEast"
+Range("D7").Value = "xlExcel4"
+Range("D8").Value = "xlAddIn"
+Range("D9").Value = "xlCSVMac"
+Range("D10").Value = "xlCSVWindows"
+Range("D11").Value = "xlDBF2"
+Range("D12").Value = "xlDBF4"
+Range("D13").Value = "xlExcel2"
+Range("D14").Value = "xlExcel3"
+Range("D15").Value = "xlExcel4Workbook"
+Range("D16").Value = "xlExcel5"
+Range("D17").Value = "xlExcel7"
+Range("D18").Value = "xlExcel9795"
+Range("D19").Value = "xlHtml"
+Range("D20").Value = "xlIntlAddIn"
+Range("D21").Value = "xlIntlMacro"
+Range("D22").Value = "xlSYLK"
+Range("D23").Value = "xlTemplate"
+Range("D24").Value = "xlTextMac"
+Range("D25").Value = "xlTextMSDOS"
+Range("D26").Value = "xlTextPrinter"
+Range("D27").Value = "xlTextWindows"
+Range("D28").Value = "xlUnicodeText"
+Range("D29").Value = "xlWebArchive"
+Range("D30").Value = "xlWJ2WD1"
+Range("D31").Value = "xlWJ3"
+Range("D32").Value = "xlWJ3FJ3"
+Range("D33").Value = "xlWK1"
+Range("D34").Value = "xlWK1ALL"
+Range("D35").Value = "xlWK1FMT"
+Range("D36").Value = "xlWK3"
+Range("D37").Value = "xlWK3FM3"
+Range("D38").Value = "xlWK4"
+Range("D39").Value = "xlWKS"
+Range("D40").Value = "xlWorkbookNormal"
+Range("D41").Value = "xlWorks2FarEast"
+Range("D42").Value = "xlWQ1"
+Range("D43").Value = "xlXMLSpreadsheet"
+
+
+result:
+xlDBF3	8
+xlDIF	9
+xlExcel2FarEast	27
+xlExcel4	33
+xlAddIn	18
+xlCSVMac	22
+xlCSVWindows	23
+xlDBF2	7
+xlDBF4	11
+xlExcel2	16
+xlExcel3	29
+xlExcel4Workbook	35
+xlExcel5	39
+xlExcel7	39
+xlExcel9795	43
+xlHtml	44
+xlIntlAddIn	26
+xlIntlMacro	25
+xlSYLK	2
+xlTemplate	17
+xlTextMac	19
+xlTextMSDOS	21
+xlTextPrinter	36
+xlTextWindows	20
+xlUnicodeText	42
+xlWebArchive	45
+xlWJ2WD1	14
+xlWJ3	40
+xlWJ3FJ3	41
+xlWK1	5
+xlWK1ALL	31
+xlWK1FMT	30
+xlWK3	15
+xlWK3FM3	32
+xlWK4	38
+xlWKS	4
+xlWorkbookNormal	-4143
+xlWorks2FarEast	28
+xlWQ1	34
+xlXMLSpreadsheet	46

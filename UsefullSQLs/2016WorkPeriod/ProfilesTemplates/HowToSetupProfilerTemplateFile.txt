@@ -1,0 +1,18 @@
+copy .tdf file to:
+%appdata%\Microsoft\SQL Profiler\12.0\Templates\Microsoft SQL Server\110\
+this is example. Path can be different and depends on profiler and server connection versions:
+	12.0 - profiler version 
+		can be found in 
+				Profiler application 
+			-> 	"Help" menu 
+			-> 	"About SQL Server Profiler" submenu
+	110 - server version of profiler connected
+		can be found in 
+				Profiler application 
+			-> 	"New Trace" menu\button 
+			-> 	"Connect to Server" window
+			-> 	"Connect" button 
+			->	"Trace Properties" window
+			->  look in "Trace provider type" field group
+			->  look in "version:" control
+		all descriptions made for SQL profiler 12.0 version

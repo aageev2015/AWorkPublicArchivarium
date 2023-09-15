@@ -1,0 +1,119 @@
+/*delete from tbl_DataflowHistory
+where DataflowId= '{985F7B8E-C3F0-423C-9168-395E91646A3F}'*/
+declare @TargetType varchar(250)
+set @TargetType = 'Demo'
+--set @TargetType = 'Base'
+
+
+
+declare @DemoContentManagerID uniqueidentifier;
+declare @BaseContentManagerID uniqueidentifier;
+declare @SupervisorID uniqueidentifier;
+set @BaseContentManagerID = (select top 1 id from tbl_Contact where Name = 'Base Content Manager')
+--'{7DE33897-86A9-421B-851D-2E39BA91648A}';
+set @DemoContentManagerID = (select top 1 id from tbl_Contact where Name = 'Demo Content Manager')
+--'{CCACD52F-B640-477A-8A86-A17032120446}';
+set @SupervisorID = (select top 1 id from tbl_Contact where Name = 'Supervisor')
+-- '{F8595201-B96A-42AF-9407-FDCDB0757A80}'
+
+
+declare @ContentIDs varchar(1000);
+declare @ContentIDss varchar(1000);
+if (@TargetType='Demo')
+begin
+	set @ContentIDs = '''{' + cast(@BaseContentManagerID as varchar(38)) + '}'', ''{'+
+			cast(@SupervisorID as varchar(38)) + '}'', ''{' +
+			cast(@DemoContentManagerID as varchar(38)) + '}''';
+	set @ContentIDss = '''''{' + cast(@BaseContentManagerID as varchar(38)) + '}'''', ''''{'+
+			cast(@SupervisorID as varchar(38)) + '}'''', ''''{' +
+			cast(@DemoContentManagerID as varchar(38)) + '}''''';
+end else begin
+	set @ContentIDs = '''{' + cast(@BaseContentManagerID as varchar(38)) + '}''';
+	set @ContentIDss = '''''{' + cast(@BaseContentManagerID as varchar(38)) + '}''''';
+end
+print @ContentIDs
+
+
+
+create table #tmp2(
+TableName varchar(255),
+FieldName varchar(255),
+ForeignTableName varchar(255),
+FakeCount int,
+CheckSQL varchar(2024)
+)
+
+
+insert into #tmp2
+select t1.Code,t4.name,t6.name,0,'' 
+from tbl_Service t1, sysobjects  t2, syscolumns t4, sysforeignkeys t5, sysobjects t6, sysobjects cid
+where t1.ServiceTypeCode = 'Table'
+and exists (select * from syscolumns t3 where t2.id=t3.id and t3.Name = 'CreatedByID')
+and t1.Code=t2.name
+and t2.id=t4.id
+and t5.fkeyid=t2.id and t5.fkey=t4.colid
+and t5.rkeyid=t6.id
+and t5.constid=cid.id
+and t1.code not in ('tbl_Service')
+and not exists(select * from tbl_ServiceProperty t7 where  t7.ServiceID=t1.ID and t7.Name = 'CascadeDelete' and t7.Value like '%'+cid.Name+'%')
+order by t1.Code, t4.Name
+
+/*select * from sysforeignkeys
+where Name = 'cascadedelete'
+and value like 'tbl_Service,ServiceID%'*/
+
+declare Cur cursor for 
+select TableName, FieldName, ForeignTableName from #tmp2
+
+declare @TableName varchar(255)
+declare @FieldName varchar(255)
+declare @ForeignTableName varchar(255)
+
+Open Cur
+while (1=1) begin
+	FETCH NEXT FROM Cur INTO @TableName, @FieldName, @ForeignTableName
+	if @@FETCH_STATUS=-1 break
+	if @@FETCH_STATUS=-2 continue
+	exec (	
+'update #tmp2 
+set FakeCount = (
+	select count(*) from '+@TableName+' t1, '+@ForeignTableName+' t2
+	where 
+	t1.'+@FieldName+' = t2.ID and
+	t1.CreatedByID in (' + @ContentIDs + ') and
+	(t2.CreatedByID not in (' + @ContentIDs + 
+		', ''{' + @SupervisorID + '}'''+
+') or (t2.CreatedByID is null))
+	and t1.'+@FieldName+' not in (' + @ContentIDs + ')
+),
+CheckSQL=''select t2.createdbyid as CreatedByID_InLookup,t1.'+@FieldName+' as '+@FieldName+',t1.CreatedByID as CreatedByID_InRecord,t1.* from '+@TableName+' t1, '+@ForeignTableName+' t2
+where t1.CreatedByID in (' + @ContentIDss + ')
+and t1.'+@FieldName+'=t2.id
+and ((t2.CreatedbyID not in (' + @ContentIDss + 
+		', ''''{' + @SupervisorID + '}'''''+
+')) or (t2.CreatedbyID is null))''
+where TableName='''+@TableName+''' and FieldName='''+@FieldName+'''')
+/*print '<'+@TableName+@FieldName+'>'
+print 'select t2.createdbyid,t1.CreatedByID,t1.* from '+@TableName+' t1, '+@ForeignTableName+' t2
+where t1.CreatedByID in (' + @ContentIDs + ')
+and t1.'+@FieldName+'=t2.id
+and ((t2.CreatedbyID not in (' + @ContentIDs + ')) or (t2.CreatedbyID is null))'*/
+end
+close cur
+deallocate cur
+
+select * from #tmp2
+where FakeCount>0
+order by FakeCount desc
+
+drop table #tmp2
+
+
+/*
+Check sql:
+select t2.createdbyid,t1.* from TableName t1, ForeignTableName t2
+where t1.CreatedByID in ('{7DE33897-86A9-421B-851D-2E39BA91648A}')
+and t1.FieldName=t2.id
+and t2.CreatedbyID not in ('{7DE33897-86A9-421B-851D-2E39BA91648A}')
+
+*/

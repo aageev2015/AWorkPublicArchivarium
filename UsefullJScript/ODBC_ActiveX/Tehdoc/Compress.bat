@@ -1,0 +1,1 @@
+img2img.exe %1 -quality 50 %2

@@ -1,0 +1,1 @@
+dir  REGISTRY::HKEY_CLASSES_ROOT\CLSID -include PROGID -recurse | foreach {$_.GetValue(“”)}

@@ -1,0 +1,31 @@
+declare @CountGenerated int
+set @CountGenerated = 0
+declare @startTime datetime
+set @startTime = getdate()
+declare @deltaSeconds int
+set @deltaSeconds=5
+
+declare  @I int
+print @starttime
+
+
+
+--countGenerated 24052 for 5 seconds
+--countGenerated 27720 for 5 seconds
+--countGenerated 23976 for 5 seconds
+
+--countGenerated 5376 for 1 seconds
+while 1=1
+begin
+	set @I=0
+	while (@I+1)%1000<>0
+	begin		
+
+		print newid()
+		set @i=@i+1
+	end
+	set @CountGenerated=@CountGenerated+@i
+	if datediff(ss,@starttime,getdate())>=@deltaSeconds break;
+end
+
+print 'countGenerated '+ cast(@CountGenerated as varchar(15))+' for '+cast(@deltaSeconds as varchar(15))+' seconds'

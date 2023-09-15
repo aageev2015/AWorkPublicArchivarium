@@ -1,0 +1,5 @@
+function Main() {
+	debugger;
+}
+
+Main()

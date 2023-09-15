@@ -1,0 +1,3 @@
+ALTER EVENT SESSION AwesomeSystemV0_event_session
+ON SERVER
+STATE=STOP
